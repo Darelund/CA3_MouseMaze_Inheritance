@@ -14,6 +14,8 @@ namespace CA3_MouseMaze_Inheritance
         public static Texture2D floorTex;
         public static Texture2D cheeseTex;
         public static Texture2D mouseTex;
+        public static Texture2D smallMouseTex;
+        public static Texture2D HammerMan_sprite_sheet;
         public static Texture2D emptyTex;
 
         public static void LoadTextures(ContentManager content)
@@ -22,6 +24,8 @@ namespace CA3_MouseMaze_Inheritance
             floorTex = content.Load<Texture2D>("floortile");
             cheeseTex = content.Load<Texture2D>("cheese");
             mouseTex = content.Load<Texture2D>("mouse");
+            smallMouseTex = content.Load<Texture2D>("mouseSmall");
+            HammerMan_sprite_sheet = content.Load<Texture2D>("HammerMan_sprite_sheet");
             emptyTex = content.Load<Texture2D>("empty");
         }
     }

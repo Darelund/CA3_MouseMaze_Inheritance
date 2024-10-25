@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct2D1.Effects;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace CA3_MouseMaze_Inheritance
@@ -14,8 +15,11 @@ namespace CA3_MouseMaze_Inheritance
 
         public static Tile[,] tileArray;
         public static int tileSize = 50;
+        public static List<GameObject> GameObjects;
 
         public MousePlayer mousePlayer;
+        public Cheese cheese;
+        public HammerMan hammarMan;
 
         public Game1()
         {
@@ -105,23 +109,26 @@ namespace CA3_MouseMaze_Inheritance
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * tileSize, i * tileSize), TextureManager.wallTex, true);
                     }
-                    //else if (result[i][j] == 'p') // Används om man vill att 'p'/player objektet ska hanteras i samma if-sats kedja som andra delar.
-                    //{
-                    //    tileArray[j, i] = new Tile(new Vector2(j * tileSize, i * tileSize), TextureManager.floorTex, false);
-                    //    mousePlayer = new MousePlayer(new Vector2(j * tileSize, i * tileSize));
-                    //}
                     else
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * tileSize, i * tileSize), TextureManager.floorTex, false);
                     }
-
-                    if (result[i][j] == 'p') // Används om man vill att 'p'/player objektet ska hanteras i separat if-sats kedja. 
+                  
+                    if (result[i][j] == 'p') // Används om man vill att 'p'/player objektet ska hanteras i samma if-sats kedja som andra delar.
                     {
-
-                        mousePlayer = new MousePlayer(new Vector2(j * tileSize, i * tileSize));
+                        mousePlayer = new MousePlayer(new Vector2(j * tileSize, i * tileSize), TextureManager.smallMouseTex);
+                    }
+                    else if (result[i][j] == 'c') // Används om man vill att 'p'/player objektet ska hanteras i samma if-sats kedja som andra delar.
+                    {
+                        cheese = new Cheese(new Vector2(j * tileSize, i * tileSize), TextureManager.cheeseTex);
+                    }
+                    else if (result[i][j] == 'h') // Används om man vill att 'p'/player objektet ska hanteras i samma if-sats kedja som andra delar.
+                    {
+                        hammarMan = new HammerMan(new Vector2(j * tileSize, i * tileSize), TextureManager.HammerMan_sprite_sheet);
                     }
                 }
             }
+          //  GameObjects.AddRange(tileArray);
         }
 
         protected override void Update(GameTime gameTime)
@@ -131,6 +138,12 @@ namespace CA3_MouseMaze_Inheritance
 
             // TODO: Add your update logic here
             mousePlayer.Update(gameTime);
+            hammarMan.Update(gameTime);
+
+           if(mousePlayer.collider.Intersects(cheese.collider))
+            {
+                cheese.IsEaten = true;
+            }
             base.Update(gameTime);
         }
 
@@ -144,6 +157,8 @@ namespace CA3_MouseMaze_Inheritance
             {
                 t.Draw(spriteBatch);
             }
+            cheese.Draw(spriteBatch);
+            hammarMan.Draw(spriteBatch);
             mousePlayer.Draw(spriteBatch);
 
             spriteBatch.End();
@@ -154,7 +169,7 @@ namespace CA3_MouseMaze_Inheritance
 
         public static bool GetTileAtPosition(Vector2 pos)
         {
-            return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
+            return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].NotWalkable;
         }
     }
 }

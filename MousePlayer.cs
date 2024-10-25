@@ -9,31 +9,31 @@ using System.Threading.Tasks;
 
 namespace CA3_MouseMaze_Inheritance
 {
-    public class MousePlayer
+    public class MousePlayer : GameObject
     {
-        public Vector2 pos;
-        public Texture2D tex;
-        public Rectangle rec;
+       private Rectangle rec;
 
-        public Vector2 destination;
-        public Vector2 direction;
-        public float speed;
-        public bool moving;
+       private Vector2 destination;
+       private Vector2 direction;
+       private float speed;
+       private bool moving;
 
 
 
-        public MousePlayer(Vector2 pos)
+        public MousePlayer(Vector2 pos, Texture2D texture): base(pos, texture)
         {
-            this.pos = pos;
-            tex = TextureManager.mouseTex;
             rec = new Rectangle((int)pos.X, (int)pos.Y, Game1.tileSize, Game1.tileSize);
             destination = Vector2.Zero;
             direction = Vector2.Zero;
             speed = 200;
             moving = false;
         }
+        public virtual Rectangle collider
+        {
+            get => new Rectangle((int)pos.X, (int)pos.Y, 50, 50);
+        }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             KeyMouseReader.Update();
 
@@ -111,6 +111,7 @@ namespace CA3_MouseMaze_Inheritance
 
 
         }
+       
 
         public void ChangeDirection(Vector2 dir)
         {
@@ -124,10 +125,10 @@ namespace CA3_MouseMaze_Inheritance
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(tex, pos, Color.White);
-            spriteBatch.Draw(tex, rec, Color.White);
+            spriteBatch.Draw(tex, pos, Color.White);
+           // spriteBatch.Draw(tex, rec, Color.White);
 
         }
     }

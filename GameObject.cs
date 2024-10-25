@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.XAudio2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace CA3_MouseMaze_Inheritance
 {
-    public class Tile : GameObject
+    public class GameObject
     {
-        private bool notWalkable;
-        public bool NotWalkable => notWalkable;
-       
+        protected Vector2 pos;
+        protected Texture2D tex;
 
-        public Tile(Vector2 pos, Texture2D tex, bool notWalkable) : base(pos, tex)
+        public GameObject(Vector2 pos, Texture2D tex)
         {
-            this.notWalkable = notWalkable;
+            this.pos = pos;
+            this.tex = tex;
         }
-
-        public override void Draw(SpriteBatch spriteBatch)
+        public virtual void Update(GameTime gameTime)
+        {
+        }
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(tex, pos, Color.White);
         }
