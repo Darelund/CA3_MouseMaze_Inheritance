@@ -15,7 +15,7 @@ namespace CA3_MouseMaze_Inheritance
         public bool NotWalkable => notWalkable;
 
         public float Rotation = 0;
-        public Vector2 Origin = new Vector2(20, 20);
+       // public Vector2 Origin = new Vector2(25, 25);
         public float Scale = 2;
 
 
@@ -25,11 +25,10 @@ namespace CA3_MouseMaze_Inheritance
         }
         public override void Update(GameTime gameTime)
         {
-            Rotation += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, pos, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None, 1f);
+            spriteBatch.Draw(tex, pos, null, Color.White);
         }
     }
 }

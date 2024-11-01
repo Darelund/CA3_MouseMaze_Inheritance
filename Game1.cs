@@ -14,14 +14,14 @@ namespace CA3_MouseMaze_Inheritance
         private SpriteBatch spriteBatch;
 
         public static Tile[,] tileArray;
-        public static int tileSize = 50;
+        public const int tileSize = 50;
         public static List<GameObject> GameObjects;
 
         public MousePlayer mousePlayer;
         public Cheese cheese;
         public HammerMan hammarMan;
 
-        private Tile _tile;
+        //private Tile _tile;
 
         public Game1()
         {
@@ -44,7 +44,7 @@ namespace CA3_MouseMaze_Inheritance
             TextureManager.LoadTextures(Content);
 
             CreateLevel("maze.txt");
-            _tile = new Tile(new Vector2(200, 200), TextureManager.floorTex, true);
+           // _tile = new Tile(new Vector2(200, 200), TextureManager.floorTex, true);
 
             //----------------Koden nedan används inte på grund av att vi skapade metoder----------------
 
@@ -147,7 +147,7 @@ namespace CA3_MouseMaze_Inheritance
                 cheese.IsEaten = true;
             }
 
-            _tile.Update(gameTime);
+          //  _tile.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -166,7 +166,7 @@ namespace CA3_MouseMaze_Inheritance
             mousePlayer.Draw(spriteBatch);
 
 
-            _tile.Draw(spriteBatch);
+            //_tile.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
