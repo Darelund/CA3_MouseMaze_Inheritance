@@ -18,7 +18,7 @@ namespace CA3_MouseMaze_Inheritance
        private float speed;
        private bool moving;
 
-
+        private float rotation;
 
         public MousePlayer(Vector2 pos, Texture2D texture): base(pos, texture)
         {
@@ -39,35 +39,7 @@ namespace CA3_MouseMaze_Inheritance
 
             if (!moving)
             {
-                if (KeyMouseReader.KeyPressed(Keys.Up))
-                {
-                    //direction = new Vector2(0, -1);
-                    //Vector2 newDestination = pos + Game1.tileSize * direction;
-
-                    //if (!Game1.GetTileAtPosition(newDestination)) 
-                    //{
-                    //    destination = newDestination;
-                    //    moving = true;
-                    //}
-
-                    ChangeDirection(new Vector2(0, -1));
-
-                }
-                else if (KeyMouseReader.KeyPressed(Keys.Down))
-                {
-                    ChangeDirection(new Vector2(0, 1));
-                }
-                else if (KeyMouseReader.KeyPressed(Keys.Left))
-                {
-                    ChangeDirection(new Vector2(-1, 0));
-                }
-                else if (KeyMouseReader.KeyPressed(Keys.Right))
-                {
-                    ChangeDirection(new Vector2(1, 0));
-                }
-
-                //Samma som uppe men kan hålla in nu
-                //if (KeyMouseReader.KeyIsPressed(Keys.Up))
+                //if (KeyMouseReader.KeyPressed(Keys.Up))
                 //{
                 //    //direction = new Vector2(0, -1);
                 //    //Vector2 newDestination = pos + Game1.tileSize * direction;
@@ -81,18 +53,49 @@ namespace CA3_MouseMaze_Inheritance
                 //    ChangeDirection(new Vector2(0, -1));
 
                 //}
-                //else if (KeyMouseReader.KeyIsPressed(Keys.Down))
+                //else if (KeyMouseReader.KeyPressed(Keys.Down))
                 //{
                 //    ChangeDirection(new Vector2(0, 1));
                 //}
-                //else if (KeyMouseReader.KeyIsPressed(Keys.Left))
+                //else if (KeyMouseReader.KeyPressed(Keys.Left))
                 //{
                 //    ChangeDirection(new Vector2(-1, 0));
                 //}
-                //else if (KeyMouseReader.KeyIsPressed(Keys.Right))
+                //else if (KeyMouseReader.KeyPressed(Keys.Right))
                 //{
                 //    ChangeDirection(new Vector2(1, 0));
                 //}
+
+                //Samma som uppe men kan hålla in nu
+                if (KeyMouseReader.KeyIsPressed(Keys.Up))
+                {
+                    //direction = new Vector2(0, -1);
+                    //Vector2 newDestination = pos + Game1.tileSize * direction;
+
+                    //if (!Game1.GetTileAtPosition(newDestination)) 
+                    //{
+                    //    destination = newDestination;
+                    //    moving = true;
+                    //}
+                    rotation = MathHelper.ToRadians(180);
+                    ChangeDirection(new Vector2(0, -1));
+
+                }
+                else if (KeyMouseReader.KeyIsPressed(Keys.Down))
+                {
+                    ChangeDirection(new Vector2(0, 1));
+                    rotation = MathHelper.ToRadians(0);
+                }
+                else if (KeyMouseReader.KeyIsPressed(Keys.Left))
+                {
+                    ChangeDirection(new Vector2(-1, 0));
+                    rotation = MathHelper.ToRadians(90);
+                }
+                else if (KeyMouseReader.KeyIsPressed(Keys.Right))
+                {
+                    ChangeDirection(new Vector2(1, 0));
+                    rotation = MathHelper.ToRadians(270);
+                }
 
 
             }
@@ -127,7 +130,7 @@ namespace CA3_MouseMaze_Inheritance
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, pos, Color.White);
+            spriteBatch.Draw(tex, pos + new Vector2(25, 30), null, Color.White, rotation, new Vector2(25, 30), 1f, SpriteEffects.None, 0f);
            // spriteBatch.Draw(tex, rec, Color.White);
 
         }
