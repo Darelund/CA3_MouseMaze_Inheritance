@@ -21,6 +21,8 @@ namespace CA3_MouseMaze_Inheritance
         public Cheese cheese;
         public HammerMan hammarMan;
 
+        private Tile _tile;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -42,7 +44,7 @@ namespace CA3_MouseMaze_Inheritance
             TextureManager.LoadTextures(Content);
 
             CreateLevel("maze.txt");
-
+            _tile = new Tile(new Vector2(200, 200), TextureManager.floorTex, true);
 
             //----------------Koden nedan används inte på grund av att vi skapade metoder----------------
 
@@ -144,6 +146,8 @@ namespace CA3_MouseMaze_Inheritance
             {
                 cheese.IsEaten = true;
             }
+
+            _tile.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -161,6 +165,8 @@ namespace CA3_MouseMaze_Inheritance
             hammarMan.Draw(spriteBatch);
             mousePlayer.Draw(spriteBatch);
 
+
+            _tile.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
